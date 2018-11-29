@@ -6,6 +6,7 @@ typedef struct		s_piece
 	unsigned short	shape;
 	int		wide;
 	int		length;
+	char	letter;
 }			t_piece;
 
 typedef struct		s_list
