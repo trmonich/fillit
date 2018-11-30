@@ -5,21 +5,24 @@
 
 //comrendre le probleme list to struct
 
-t_piece	to_piece(char **tab)
+
+unsigned short	tab_to_shape(char **tab)
 {
-	t_piece	piece;
+	unsigned short	shape;
 	int		i;
 	int		j;
 	int		first[2];
-	int		count;
 
+	write(1, "on rentre dans topiece\n", 24);
 	first[0] = 0;
 	first[1] = 0;
-	count = 0;
-	piece.shape = 0;
+
+	shape = 0;
 	i = -1;
 	while (tab[++i])
 	{
+		write(1, tab[i], ft_strlen(tab[i]));
+		write(1, "\n", 1);
 		j = -1;
 		while (tab[i][++j])
 		{
@@ -29,24 +32,14 @@ t_piece	to_piece(char **tab)
 					first[0] = i;
 				if (!first[1])
 					first[1] = j;
-				piece.shape = piece.shape & (1 << (16 - (i * 4 + j))); // a revoir, struct pour coordonne du point ?
-				count++;
-			}
-			else if (tab[i][j] != '.')
-			{
-				piece.shape = 0;
-				return (piece);
+				shape = shape & (1 << (16 - (i * 4 + j))); // a revoir, struct pour coordonne du point ?
 			}
 		}
 	}
-	if (count != 4)
-	{
-		piece.shape = 0;
-		return (piece);
-	}
-	piece.shape = piece.shape << (first[0] * 4);
-	piece. shape = piece.shape << (first[1]);
-	return (piece);
+	write(1, "on a cree la piece\n", 24);
+	shape = shape << (first[0] * 4);
+	shape = shape << (first[1]);
+	return (shape);
 }
 
 void	size(t_piece *piece)
@@ -67,34 +60,77 @@ void	size(t_piece *piece)
 		(*piece).shape = 0;
 }
 
+static int		check_validity(char **tab)
+{
+	int		i;
+	int		j;
+	int		count;
+
+	i = -1;
+	while (tab[++i])
+	{
+		j = -1;
+		if (ft_strlen(tab[i]) != 4)
+			return (0);
+		while (tab[i][++j])
+		{
+			if (tab[i][j] == '#')
+				count++;
+			else if (tab[i][j] != '.')
+				return (0);
+		}
+	}
+	if (i != 4 || count != 4)
+		return (0);
+	return (1);
+}
+
+t_piece *new_piece(unsigned short shape)
+{
+	static char c = 'A';
+	t_piece		*piece;
+
+	piece->shape = shape;
+	size(piece);
+	return (piece);
+}
+
 t_list	*read_pieces(int fd)
 {
 	char	**tab;
-	int		i;
 	t_list	*list;
-	t_piece	piece;
+	t_piece	*piece;
+	char	buff[BUFF_SIZE + 1]; //mis a 20 + 1, au cas ou la taille changerait
+	int		ret;
 
-	tab = (char**)malloc(sizeof(*tab) * 4);
 	list = NULL;
-	i = 0;
-	while (get_next_line(fd, &tab[i]))
+	while ((ret = read(fd, buff, BUFF_SIZE)))
 	{
-		if (i == 4)
+		buff[ret] = 0;
+		tab = ft_strsplit(buff, '\n');
+		//deb
+		int i = 0;
+		while (tab[i])
 		{
-			if (*(tab[i]) != '\n' || ft_strlen(tab[i]) != 1)
-				return (NULL);
-			i = -1;
-			//ajouter le maillon, NULL si NULL
-			piece = to_piece(tab);
-			if (!piece.shape)
-				return (NULL);
-			ft_lstappend(&list, ft_lstnew(piece, sizeof(piece)));
+			ft_putendl(tab[i]);
+			i++;
 		}
-		else
-			if (ft_strlen(tab[i]) != 4)
-				return (NULL);
-		i++;
+		write(1,"pas la 1\n", 9);
+		if (!check_validity(tab))
+			return (NULL);
+		//piece = to_piece(tab);
+		//if (!piece->shape)
+		//	return (NULL);
+		//	debug
+		unsigned short shape = tab_to_shape(tab);
+		write(1,"pas la 2\n", 9);
+		piece = new_piece(tab_to_shape(tab));
+		write(1,"pas la 3\n", 9);
+		ft_lstappend(&list, ft_lstnew(piece, sizeof(piece)));
+		if (read(fd, buff, 1) && *buff != '\n')
+			return (NULL);
 	}
+	//free le tab
 	return (list);
 }
 
@@ -103,14 +139,14 @@ int		main()
 	int		fd;
 	t_list	*list;
 	unsigned short n;
-	t_piece	piece;
+	t_piece	*piece;
 
 	fd = open("pieces.txt", O_RDONLY);
 	list = read_pieces(fd);
-	piece = (t_piece)*(list->content); //gerer la structure ou la liste
+	piece = list->content; //gerer la structure ou la liste
 	while (list)
 	{
-		n = piece.shape;
+		n = piece->shape;
 		while (n)
 		{
 			if (n & 1)
