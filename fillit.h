@@ -9,10 +9,4 @@ typedef struct		s_piece
 	char	letter;
 }			t_piece;
 
-typedef struct		s_list
-{
-	void		*content;
-	int		content_size;
-}			t_list;
-
 #endif

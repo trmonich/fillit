@@ -6,7 +6,7 @@
 /*   By: alesteph <alesteph@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/03 10:08:17 by alesteph          #+#    #+#             */
-/*   Updated: 2018/12/03 10:23:11 by alesteph         ###   ########.fr       */
+/*   Updated: 2018/12/03 15:15:33 by alesteph         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,14 @@ static int	display_error(char *str)
 
 int			fillit(int fd)
 {
-	char	buffer[22];
+	char	**tab;
+	char	buffer[21];
 
-	while (read(fd, buffer, 21) > 0)
+	while (read(fd, buffer, 20) > 0)
 	{
-		buffer[21] = '\0';
-		if (check_tetri(buffer) < 0)
+		buffer[20] = '\0';
+		tab = ft_strsplit(buffer, '\n');
+		if (!check_validity(tab))
 			return (display_error("wrong tetri"));
 	}
 	return (0);

@@ -4,7 +4,8 @@
 # include "libft.h"
 
 int		fillit(int fd);
-int		check_tetri(char *buffer);
+int		check_validity(char **tab);
+int		check_link(char **tab);
 
 typedef struct		s_piece
 {
