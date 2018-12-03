@@ -14,10 +14,10 @@ unsigned short	tab_to_shape(char **tab)
 	int		first[2];
 
 	write(1, "on rentre dans topiece\n", 24);
-	first[0] = 0;
-	first[1] = 0;
+	first[0] = 3;
+	first[1] = 3;
 
-	shape = 0;
+	shape = 0b0;
 	i = -1;
 	while (tab[++i])
 	{
@@ -28,11 +28,11 @@ unsigned short	tab_to_shape(char **tab)
 		{
 			if (tab[i][j] == '#')
 			{
-				if (!first[0])
+				if (first[0] > i)
 					first[0] = i;
-				if (!first[1])
+				if (first[1] > j)
 					first[1] = j;
-				shape = shape & (1 << (16 - (i * 4 + j))); // a revoir, struct pour coordonne du point ?
+				shape = shape | (1 << (15 - (i * 4 + j))); // a revoir, struct pour coordonne du point ?
 			}
 		}
 	}
@@ -42,33 +42,17 @@ unsigned short	tab_to_shape(char **tab)
 	return (shape);
 }
 
-void	size(t_piece *piece)
-{
-	int				i;
-	unsigned long	test;
-
-	test = (*piece).shape;
-	i = 0;
-	while (test)
-	{
-		i++;
-		test = test << 1;
-	}
-	(*piece).length = i / 4 + 1;
-	(*piece).wide = i % 4 + 1;
-	if ((*piece).length + (*piece).wide > 5)
-		(*piece).shape = 0;
-}
-
 static int		check_validity(char **tab)
 {
 	int		i;
 	int		j;
 	int		count;
 
-	i = -1;
-	while (tab[++i])
+	i = 0;
+	count = 0;
+	while (tab[i])
 	{
+		write(1,"pas la val\n", 11);
 		j = -1;
 		if (ft_strlen(tab[i]) != 4)
 			return (0);
@@ -79,26 +63,22 @@ static int		check_validity(char **tab)
 			else if (tab[i][j] != '.')
 				return (0);
 		}
+		i++;
 	}
+	write(1,"pas la sor\n", 11);
+	ft_putnbr(i);
+	ft_putnbr(count);
 	if (i != 4 || count != 4)
 		return (0);
+	write(1,"pas la po1\n", 11);
 	return (1);
-}
-
-t_piece *new_piece(unsigned short shape)
-{
-	static char c = 'A';
-	t_piece		*piece;
-
-	piece->shape = shape;
-	size(piece);
-	return (piece);
 }
 
 t_list	*read_pieces(int fd)
 {
 	char	**tab;
 	t_list	*list;
+	t_list	*list2;
 	t_piece	*piece;
 	char	buff[BUFF_SIZE + 1]; //mis a 20 + 1, au cas ou la taille changerait
 	int		ret;
@@ -106,6 +86,9 @@ t_list	*read_pieces(int fd)
 	list = NULL;
 	while ((ret = read(fd, buff, BUFF_SIZE)))
 	{
+		ft_putstr("test : ");
+		ft_putnbr(ret);
+		ft_putchar(10);
 		buff[ret] = 0;
 		tab = ft_strsplit(buff, '\n');
 		//deb
@@ -122,11 +105,13 @@ t_list	*read_pieces(int fd)
 		//if (!piece->shape)
 		//	return (NULL);
 		//	debug
-		unsigned short shape = tab_to_shape(tab);
 		write(1,"pas la 2\n", 9);
 		piece = new_piece(tab_to_shape(tab));
 		write(1,"pas la 3\n", 9);
-		ft_lstappend(&list, ft_lstnew(piece, sizeof(piece)));
+		list2 = ft_lstnew(piece, sizeof(piece));
+		write(1,"pas la 3.5\n", 11);
+		ft_lstappend(&list, list2);
+		write(1,"pas la 4\n", 9);
 		if (read(fd, buff, 1) && *buff != '\n')
 			return (NULL);
 	}
@@ -143,19 +128,16 @@ int		main()
 
 	fd = open("pieces.txt", O_RDONLY);
 	list = read_pieces(fd);
-	piece = list->content; //gerer la structure ou la liste
+	ft_putendl("retour au main");
 	while (list)
 	{
-		n = piece->shape;
-		while (n)
-		{
-			if (n & 1)
-				printf("1");
-			else
-				printf("0");
-		n >>= 1;
-		}
-		printf("\n");
+		piece = (list->content); //gerer la structure ou la liste
+		ft_putnbr((int)piece->shape);
+		ft_putchar(10);
+		ft_putnbr((int)piece->wide);
+		ft_putchar(10);
+		ft_putnbr((int)piece->length);
+		ft_putchar(10);
 		list = list->next;
 	}
 	return (0);
