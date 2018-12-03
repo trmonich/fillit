@@ -1,30 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_alesteph.c                                    :+:      :+:    :+:   */
+/*   fillit.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alesteph <alesteph@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/29 12:18:28 by alesteph          #+#    #+#             */
-/*   Updated: 2018/12/03 10:24:02 by alesteph         ###   ########.fr       */
+/*   Created: 2018/12/03 10:08:17 by alesteph          #+#    #+#             */
+/*   Updated: 2018/12/03 10:23:11 by alesteph         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
-#include <fcntl.h>
-#include <string.h>
+#include <sys/types.h>
+#include <sys/uio.h>
+#include <unistd.h>
 
-int		main(int ac, char **av)
+static int	display_error(char *str)
 {
-	int		fd;
+	if (ft_strcmp(str, "wrong tetri") == 0)
+		ft_putendl_fd("Tetriminos is/are not valid", 2);
+	return (-1);
+}
 
-	if (ac == 2)
+int			fillit(int fd)
+{
+	char	buffer[22];
+
+	while (read(fd, buffer, 21) > 0)
 	{
-		fd = open(av[1], O_RDONLY);
-		fillit(fd);
-		close(fd);
+		buffer[21] = '\0';
+		if (check_tetri(buffer) < 0)
+			return (display_error("wrong tetri"));
 	}
-	else
-		ft_putstr_fd("usage: ./fillit file_name\n", 2);
 	return (0);
 }

@@ -1,24 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   check_tetri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alesteph <alesteph@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/14 12:43:40 by alesteph          #+#    #+#             */
-/*   Updated: 2018/11/29 16:26:11 by alesteph         ###   ########.fr       */
+/*   Created: 2018/12/03 09:59:09 by alesteph          #+#    #+#             */
+/*   Updated: 2018/12/03 10:08:08 by alesteph         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "fillit.h"
 
-# define BUFF_SIZE 1
+int		check_tetri(char *buffer)
+{
+	int	i;
+	int	lines;
+	int	hashtag;
 
-# include <sys/types.h>
-# include <sys/uio.h>
-# include "libft.h"
-
-int		get_next_line(const int fd, char **line);
-
-#endif
+	i = -1;
+	lines = 0;
+	hashtag = 0;
+	while (buffer[++i])
+	{
+		if (buffer[i] == '\n')
+			lines++;
+		else if (buffer[i] == '#')
+			hashtag++;
+	}
+	if (lines != 5 || hashtag != 4)
+		return (-1);
+	return (0);
+}

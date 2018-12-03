@@ -3,6 +3,9 @@
 
 # include "libft.h"
 
+int		fillit(int fd);
+int		check_tetri(char *buffer);
+
 typedef struct		s_piece
 {
 	unsigned short	shape;

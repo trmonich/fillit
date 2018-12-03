@@ -6,7 +6,7 @@
 #    By: alesteph <alesteph@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/29 12:57:53 by alesteph          #+#    #+#              #
-#    Updated: 2018/11/30 11:41:40 by alesteph         ###   ########.fr        #
+#    Updated: 2018/12/03 09:54:12 by alesteph         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,8 +16,7 @@ FLAGS= -Wall -Werror -Wextra
 
 NAME= fillit
 
-SRCS= srcs/get_next_line.c \
-	  srcs/main_alesteph.c
+SRCS= $(shell find srcs -maxdepth 1 -type f -name "*.c")
 
 INCLUDES= ./includes/
 
