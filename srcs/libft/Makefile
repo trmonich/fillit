@@ -6,7 +6,7 @@
 #    By: alesteph <alesteph@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/06 14:13:34 by alesteph          #+#    #+#              #
-#    Updated: 2018/11/29 16:30:51 by alesteph         ###   ########.fr        #
+#    Updated: 2018/11/30 09:29:22 by alesteph         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -89,10 +89,12 @@ OBJS= $(SRCS:.c=.o) $(BONUS:.c=.o) $(ADDS:.c=.o)
 
 all: $(NAME)
 
-$(NAME):
-	$(GCC) $(FLAGS) -I ../../includes/ -c $(SRCS) $(BONUS) $(ADDS)
+$(NAME): $(OBJS)
 	ar rc $(NAME) $(OBJS)
 	ranlib $(NAME)
+
+%.o: %.c
+	$(GCC) $(FLAGS) -I ../../includes/ -o $@ -c $<
 
 clean:
 	rm -f $(OBJS)
