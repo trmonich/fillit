@@ -1,29 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstappend.c                                     :+:      :+:    :+:   */
+/*   pieces.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: trmonich <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/29 11:29:53 by trmonich          #+#    #+#             */
-/*   Updated: 2018/12/03 12:23:33 by trmonich         ###   ########.fr       */
+/*   Created: 2018/12/03 11:36:21 by trmonich          #+#    #+#             */
+/*   Updated: 2018/12/03 11:53:31 by trmonich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "fillit.h"
+#include "libft/libft.h"
 
-void	ft_lstappend(t_list **alst, t_list *new)
+void	size(t_piece *piece)
 {
-	ft_putendl("on rentre dans app");
-	t_list	*list;
+	int				i;
+	unsigned long	test;
 
-	if (*alst == NULL)
+	test = (*piece).shape;
+	i = 0;
+	while (test)
 	{
-		ft_lstadd(alst, new);
-		return ;
+		i++;
+		test = test << 1;
 	}
-	list = *alst;
-	while (list->next)
-		list = list->next;
-	list->next = new;
+	(*piece).length = i / 4 + 1;
+	(*piece).wide = i % 4 + 1;
+}
+
+t_piece *new_piece(unsigned short shape)
+{
+	t_piece		*piece;
+
+	piece = ft_memalloc(sizeof(*piece));
+	piece->shape = shape;
+	size(piece);
+	return (piece);
 }
