@@ -107,8 +107,11 @@ t_list	*read_pieces(int fd)
 		//	debug
 		write(1,"pas la 2\n", 9);
 		piece = new_piece(tab_to_shape(tab));
+		printf("on a bien %d et %d en sortant encore\n", piece->length, piece->wide);
 		write(1,"pas la 3\n", 9);
-		list2 = ft_lstnew(piece, sizeof(piece));
+		list2 = ft_lstnew(piece, sizeof(*piece));
+		piece = list2->content;
+		printf("on a bien %d et %d en liste\n", piece->length, piece->wide);
 		write(1,"pas la 3.5\n", 11);
 		ft_lstappend(&list, list2);
 		write(1,"pas la 4\n", 9);
@@ -132,6 +135,7 @@ int		main()
 	while (list)
 	{
 		piece = (list->content); //gerer la structure ou la liste
+		printf("on a bien %d et %d en sortant pour la derniere\n", piece->length, piece->wide);
 		ft_putnbr((int)piece->shape);
 		ft_putchar(10);
 		ft_putnbr((int)piece->wide);

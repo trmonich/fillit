@@ -6,7 +6,7 @@
 /*   By: trmonich <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/03 11:36:21 by trmonich          #+#    #+#             */
-/*   Updated: 2018/12/03 11:53:31 by trmonich         ###   ########.fr       */
+/*   Updated: 2018/12/05 18:36:30 by trmonich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,35 @@
 
 void	size(t_piece *piece)
 {
-	int				i;
-	unsigned long	test;
+	unsigned short	mask;
+	unsigned short	test;
 
-	test = (*piece).shape;
-	i = 0;
-	while (test)
+	test = piece->shape;
+	printf("begin %hu\n", test);
+	piece->wide = 0;
+	mask = 0x8888;
+	while (test != 0x0)
 	{
-		i++;
-		test = test << 1;
+		printf("on a test W %hu\n", test);
+		printf("on a mask W %hu\n", mask);
+		test = test & (~mask);
+		printf("on a test W devenu %hu\n", test);
+		piece->wide++;
+		mask = mask >> 1;
 	}
-	(*piece).length = i / 4 + 1;
-	(*piece).wide = i % 4 + 1;
+	test = piece->shape;
+	mask = 0xF000;
+	piece->length = 0;
+	while (test != 0x0)
+	{
+		printf("on a test L %hu\n", test);
+		printf("on a mask L %hu\n", mask);
+		test = test & (~mask);
+		printf("on a test L devenu %hu\n", test);
+		piece->length++;
+		mask = mask >> 4;
+	}
+	printf("on a bien %d et %d\n", piece->length, piece->wide);
 }
 
 t_piece *new_piece(unsigned short shape)
@@ -36,5 +53,6 @@ t_piece *new_piece(unsigned short shape)
 	piece = ft_memalloc(sizeof(*piece));
 	piece->shape = shape;
 	size(piece);
+	printf("on a bien %d et %d en sortant\n", piece->length, piece->wide);
 	return (piece);
 }
