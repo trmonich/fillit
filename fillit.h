@@ -12,5 +12,6 @@ typedef struct		s_piece
 
 t_piece *new_piece(unsigned short shape);
 t_list	*read_pieces(int fd);
+int		calcul(t_list *list);
 
 #endif

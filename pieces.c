@@ -6,12 +6,13 @@
 /*   By: trmonich <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/03 11:36:21 by trmonich          #+#    #+#             */
-/*   Updated: 2018/12/05 18:36:30 by trmonich         ###   ########.fr       */
+/*   Updated: 2018/12/06 09:25:13 by alesteph         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 #include "libft/libft.h"
+#include <stdio.h> //debug
 
 void	size(t_piece *piece)
 {
