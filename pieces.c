@@ -6,13 +6,31 @@
 /*   By: trmonich <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/03 11:36:21 by trmonich          #+#    #+#             */
-/*   Updated: 2018/12/06 09:25:13 by alesteph         ###   ########.fr       */
+/*   Updated: 2018/12/06 10:12:48 by alesteph         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 #include "libft/libft.h"
 #include <stdio.h> //debug
+
+int		calcul(t_list *list)
+{
+	t_piece *piece;
+	int	height;
+	int	width;
+
+	height = 0;
+	width = 0;
+	while (list)
+	{
+		piece = list->content;
+		height += piece->length;
+		width += piece->wide;
+		list = list->next;
+	}
+	return ((height > width) ? height : width);
+}
 
 void	size(t_piece *piece)
 {
