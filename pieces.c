@@ -6,7 +6,7 @@
 /*   By: trmonich <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/03 11:36:21 by trmonich          #+#    #+#             */
-/*   Updated: 2018/12/06 10:19:23 by alesteph         ###   ########.fr       */
+/*   Updated: 2018/12/06 17:40:24 by alesteph         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,11 @@ void	size(t_piece *piece)
 	unsigned short	test;
 
 	test = piece->shape;
-	printf("begin %hu\n", test);
 	piece->wide = 0;
 	mask = 0x8888;
 	while (test != 0x0)
 	{
-		printf("on a test W %hu\n", test);
-		printf("on a mask W %hu\n", mask);
 		test = test & (~mask);
-		printf("on a test W devenu %hu\n", test);
 		piece->wide++;
 		mask = mask >> 1;
 	}
@@ -36,13 +32,10 @@ void	size(t_piece *piece)
 	piece->length = 0;
 	while (test != 0x0)
 	{
-		printf("on a test L %hu\n", test);
-		printf("on a mask L %hu\n", mask);
 		test = test & (~mask);
-		printf("on a test L devenu %hu\n", test);
 		piece->length++;
 		mask = mask >> 4;
-}
+	}
 	printf("on a bien %d et %d\n", piece->length, piece->wide);
 }
 
