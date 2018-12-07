@@ -6,7 +6,7 @@
 /*   By: trmonich <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 14:08:42 by trmonich          #+#    #+#             */
-/*   Updated: 2018/11/30 10:51:55 by trmonich         ###   ########.fr       */
+/*   Updated: 2018/12/07 08:44:25 by trmonich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <stdlib.h>
 # include <string.h>
 
-# define BUFF_SIZE 20
+# define BUFF_SIZE 15
 
 
 typedef struct		s_list
@@ -30,6 +30,7 @@ typedef struct		s_list
 }					t_list;
 
 void				*ft_memset(void *b, int c, size_t len);
+int					ft_lstlen(t_list *lst);
 void				*ft_bzero(void *s, size_t len);
 void				*ft_memcpy(void *dst, const void *src, size_t n);
 void				*ft_memccpy(void *dst, const void *src, int c, size_t n);
