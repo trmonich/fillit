@@ -6,13 +6,12 @@
 /*   By: trmonich <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/03 11:36:21 by trmonich          #+#    #+#             */
-/*   Updated: 2018/12/07 10:58:19 by alesteph         ###   ########.fr       */
+/*   Updated: 2018/12/07 12:55:42 by alesteph         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 #include "libft/libft.h"
-#include <stdio.h>
 
 int		calcul(t_list *list)
 {
@@ -55,7 +54,6 @@ void	size(t_piece *piece)
 		piece->length++;
 		mask = mask >> 4;
 	}
-	printf("on a bien %d et %d\n", piece->length, piece->wide);
 }
 
 t_piece *new_piece(unsigned short shape)
@@ -65,6 +63,5 @@ t_piece *new_piece(unsigned short shape)
 	piece = ft_memalloc(sizeof(*piece));
 	piece->shape = shape;
 	size(piece);
-	printf("on a bien %d et %d en sortant\n", piece->length, piece->wide);
 	return (piece);
 }
