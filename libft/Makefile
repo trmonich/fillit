@@ -6,7 +6,7 @@
 #    By: trmonich <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/06 16:34:09 by trmonich          #+#    #+#              #
-#    Updated: 2018/11/29 14:58:12 by trmonich         ###   ########.fr        #
+#    Updated: 2018/12/07 08:44:03 by trmonich         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,6 +67,7 @@ SRCS = ft_bzero.c \
 	ft_lstdelone.c \
 	ft_lstdel.c \
 	ft_lstadd.c \
+	ft_lstlen.c \
 	ft_lstiter.c \
 	ft_lstmap.c \
 	ft_memalloc.c \
