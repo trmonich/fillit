@@ -6,16 +6,13 @@
 /*   By: trmonich <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/03 11:36:21 by trmonich          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2018/12/06 17:40:24 by alesteph         ###   ########.fr       */
-=======
-/*   Updated: 2018/12/06 10:12:48 by alesteph         ###   ########.fr       */
->>>>>>> fbe500abf4f2becc456a836aafbce6bc598cef41
+/*   Updated: 2018/12/07 10:58:19 by alesteph         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 #include "libft/libft.h"
+#include <stdio.h>
 
 int		calcul(t_list *list)
 {
