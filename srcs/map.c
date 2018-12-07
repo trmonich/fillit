@@ -6,11 +6,19 @@
 /*   By: alesteph <alesteph@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 12:07:28 by alesteph          #+#    #+#             */
-/*   Updated: 2018/12/07 12:14:01 by alesteph         ###   ########.fr       */
+/*   Updated: 2018/12/07 17:11:25 by alesteph         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
+
+int		size_of_map(t_list *list, int *pos)
+{
+	int	height;
+	int	width;
+
+	
+}
 
 char	*create_map(int size)
 {

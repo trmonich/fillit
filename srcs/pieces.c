@@ -6,14 +6,14 @@
 /*   By: trmonich <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/03 11:36:21 by trmonich          #+#    #+#             */
-/*   Updated: 2018/12/07 12:55:42 by alesteph         ###   ########.fr       */
+/*   Updated: 2018/12/07 13:10:00 by alesteph         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 #include "libft/libft.h"
 
-int		calcul(t_list *list)
+int		size_of_side(t_list *list)
 {
 	t_piece *piece;
 	int	height;
