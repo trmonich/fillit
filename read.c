@@ -127,14 +127,16 @@ int		main()
 {
 	int		fd;
 	t_list	*list;
+	t_list	*list2;
 	t_piece	*piece;
 
 	fd = open("pieces.txt", O_RDONLY);
 	list = read_pieces(fd);
 	ft_putendl("retour au main");
-	while (list)
+	list2 = ft_lstdup(list);
+	while (list2)
 	{
-		piece = (list->content); //gerer la structure ou la liste
+		piece = (list2->content); //gerer la structure ou la liste
 		printf("on a bien %d et %d en sortant pour la derniere\n", piece->length, piece->wide);
 		ft_putnbr((int)piece->shape);
 		ft_putchar(10);
@@ -142,7 +144,7 @@ int		main()
 		ft_putchar(10);
 		ft_putnbr((int)piece->length);
 		ft_putchar(10);
-		list = list->next;
+		list2 = list2->next;
 	}
 	return (0);
 }

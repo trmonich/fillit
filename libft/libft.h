@@ -6,7 +6,7 @@
 /*   By: trmonich <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 14:08:42 by trmonich          #+#    #+#             */
-/*   Updated: 2018/12/07 11:17:53 by alesteph         ###   ########.fr       */
+/*   Updated: 2018/12/07 12:41:12 by alesteph         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ void				ft_putnbr_base(int nb, char *base);
 int					ft_isspace(int c);
 int					ft_iscntrl(int c);
 void				ft_lstappend(t_list **alst, t_list *new);
+t_list				*ft_lstdup(t_list *src);
 int					get_next_line(const int fd, char **line);
 
 #endif
