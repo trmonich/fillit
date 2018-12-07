@@ -132,7 +132,6 @@ int		main()
 	fd = open("pieces.txt", O_RDONLY);
 	list = read_pieces(fd);
 	ft_putendl("retour au main");
-	printf("taille max = %d\n", calcul(list)); //tests - debug
 	while (list)
 	{
 		piece = (list->content); //gerer la structure ou la liste
