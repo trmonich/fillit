@@ -25,6 +25,7 @@ int	do_fit(t_piece *piece, int pos, int *map[32], int map_size) // attention ici
 	while (i < 4 && !shape[i])
 	{
 		k = pos / map_size + i;
+		shape[i] = shape[i] >> pos % map_size;
 		if (((shape[i] ^ map[k]) & map[k]) != map[k])
 			return (0);
 		map[k] = map[k] | shape[i];
