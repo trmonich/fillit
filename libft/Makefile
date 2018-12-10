@@ -69,6 +69,7 @@ SRCS = ft_bzero.c \
 	ft_lstadd.c \
 	ft_lstlen.c \
 	ft_lstiter.c \
+	ft_list_at.c \
 	ft_lstmap.c \
 	ft_memalloc.c \
 	ft_is_prime.c \

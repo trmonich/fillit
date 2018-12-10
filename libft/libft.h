@@ -100,5 +100,6 @@ int					ft_iscntrl(int c);
 void				ft_lstappend(t_list **alst, t_list *new);
 t_list				*ft_lstdup(t_list *src);
 int					get_next_line(const int fd, char **line);
+t_list				*ft_list_at(t_list *begin_list, int nbr);
 
 #endif
