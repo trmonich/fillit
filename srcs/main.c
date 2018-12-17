@@ -6,7 +6,7 @@
 /*   By: alesteph <alesteph@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 14:21:14 by alesteph          #+#    #+#             */
-/*   Updated: 2018/12/17 12:44:11 by alesteph         ###   ########.fr       */
+/*   Updated: 2018/12/17 17:44:50 by trmonich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ static void	fillit(int fd)
 		++side;
 	if (!(display(side, pool)))
 		ft_putstr("error\n");
+	free(pool);
 }
 
 int			main(int ac, char **av)

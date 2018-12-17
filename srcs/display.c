@@ -6,11 +6,21 @@
 /*   By: trmonich <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 11:26:39 by trmonich          #+#    #+#             */
-/*   Updated: 2018/12/17 12:41:53 by alesteph         ###   ########.fr       */
+/*   Updated: 2018/12/17 17:44:14 by trmonich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
+
+static void	map_free(char **map)
+{
+	int		i;
+
+	i = -1;
+	while (map[++i])
+		free(map[i]);
+	free(map);
+}
 
 static char	**map_alloc(int side)
 {
@@ -32,13 +42,12 @@ static char	**map_alloc(int side)
 
 int			display(int side, t_piece *pool)
 {
-	char	letter;
 	int		pos;
 	char	**map;
 	int		k;
 	t_point	point;
 
-	letter = 'A';
+	point.letter = 'A';
 	if (!(map = map_alloc(side)))
 		return (0);
 	while (pool->len != 0)
@@ -50,11 +59,12 @@ int			display(int side, t_piece *pool)
 			{
 				point.x = pos / side + k / 4;
 				point.y = pos % side + k % 4;
-				map[point.x][point.y] = letter;
+				map[point.x][point.y] = point.letter;
 			}
 		pool++;
-		letter++;
+		point.letter++;
 	}
 	ft_show_table(map);
+	map_free(map);
 	return (1);
 }

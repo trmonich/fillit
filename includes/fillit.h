@@ -6,7 +6,7 @@
 /*   By: trmonich <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 17:36:11 by trmonich          #+#    #+#             */
-/*   Updated: 2018/12/17 12:42:12 by alesteph         ###   ########.fr       */
+/*   Updated: 2018/12/17 17:43:55 by trmonich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct		s_point
 {
 	int				x;
 	int				y;
+	char			letter;
 }					t_point;
 
 t_piece				*read_pieces(int fd);
@@ -40,5 +41,6 @@ int					get_side(t_piece *pool);
 unsigned int		*find_solution(t_piece *pool, unsigned int *map,
 									int map_size);
 int					display(int side, t_piece *pool);
+void				free_piece(t_piece *piece);
 
 #endif

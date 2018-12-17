@@ -6,7 +6,7 @@
 /*   By: trmonich <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/09 12:49:56 by trmonich          #+#    #+#             */
-/*   Updated: 2018/11/12 12:49:56 by trmonich         ###   ########.fr       */
+/*   Updated: 2018/12/17 17:39:42 by trmonich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,9 +80,7 @@ char		**ft_strsplit(char const *str, char c)
 	int		i[2];
 	char	*s;
 
-	if (!str)
-		return (NULL);
-	if (!(where = malloc(sizeof(int) * ft_count_word(str, c))))
+	if (!str || !(where = malloc(sizeof(int) * ft_count_word(str, c))))
 		return (NULL);
 	ft_find_positions(&where, ft_count_word(str, c), str, c);
 	if (!(tab = malloc(sizeof(*tab) * (ft_count_word(str, c) + 1))))
@@ -99,5 +97,6 @@ char		**ft_strsplit(char const *str, char c)
 		tab[i[0]][i[1]] = 0;
 	}
 	tab[i[0]] = 0;
+	free(where);
 	return (tab);
 }

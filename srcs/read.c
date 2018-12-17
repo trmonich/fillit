@@ -6,13 +6,27 @@
 /*   By: alesteph <alesteph@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 14:37:57 by alesteph          #+#    #+#             */
-/*   Updated: 2018/12/17 09:45:19 by alesteph         ###   ########.fr       */
+/*   Updated: 2018/12/17 17:35:55 by trmonich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 #include <stdlib.h>
 #include <fcntl.h>
+
+static void	free_tab(char **tab)
+{
+	int	i;
+
+	i = -1;
+	while (tab[++i])
+	{
+		free(tab[i]);
+		tab[i] = NULL;
+	}
+	free(tab);
+	tab = NULL;
+}
 
 t_piece		*read_pieces(int fd)
 {
@@ -32,6 +46,7 @@ t_piece		*read_pieces(int fd)
 		if (!check_validity(tab))
 			return (NULL);
 		pool[i] = new_piece(tab);
+		free_tab(tab);
 		if (read(fd, buff, 1) && *buff != '\n')
 			return (NULL);
 		i++;
