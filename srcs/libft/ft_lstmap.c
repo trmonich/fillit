@@ -3,26 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alesteph <alesteph@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trmonich <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/13 15:04:26 by alesteph          #+#    #+#             */
-/*   Updated: 2018/11/13 16:51:24 by alesteph         ###   ########.fr       */
+/*   Created: 2018/11/12 10:51:06 by trmonich          #+#    #+#             */
+/*   Updated: 2018/11/29 11:51:27 by trmonich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdlib.h>
 
 t_list	*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem))
 {
 	t_list	*new;
+	t_list	*buff;
+	t_list	*previous;
 
-	new = NULL;
-	if (lst && f)
+	if (!lst)
+		return (NULL);
+	if (!(new = ft_lstnew(f(lst)->content, f(lst)->content_size)))
+		return (NULL);
+	buff = new;
+	previous = new;
+	lst = lst->next;
+	while (lst)
 	{
-		if (!(new = (t_list *)malloc(sizeof(t_list))))
+		if (!(new = ft_lstnew(f(lst)->content, f(lst)->content_size)))
 			return (NULL);
-		new = (*f)(lst);
-		new->next = ft_lstmap(lst->next, f);
+		previous->next = new;
+		previous = new;
+		lst = lst->next;
 	}
-	return (new);
+	return (buff);
 }

@@ -6,7 +6,7 @@
 /*   By: alesteph <alesteph@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/03 09:59:09 by alesteph          #+#    #+#             */
-/*   Updated: 2018/12/03 15:03:41 by alesteph         ###   ########.fr       */
+/*   Updated: 2018/12/17 09:32:02 by alesteph         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,22 @@ static int	pos_valid(char **tab, int i, int j)
 	int	down;
 	int	prev;
 	int	next;
+	int count;
 
 	up = (i > 0) ? i - 1 : -1;
 	down = (i < 3) ? i + 1 : -1;
 	prev = (j > 0) ? j - 1 : -1;
 	next = (j < 3) ? j + 1 : -1;
-	if ((up >= 0 && tab[up][j] == '#') || (down >= 0 && tab[down][j] == '#'))
-		return (1);
-	else if ((prev >= 0 && tab[i][prev] == '#') ||
-			(next >= 0 && tab[i][next] == '#'))
-		return (1);
-	return (0);
+	count = 0;
+	if (up >= 0 && tab[up][j] == '#')
+		count++;
+	if (down >= 0 && tab[down][j] == '#')
+		count++;
+	if (prev >= 0 && tab[i][prev] == '#')
+		count++;
+	if (next >= 0 && tab[i][next] == '#')
+		count++;
+	return (count);
 }
 
 int			check_link(char **tab)
@@ -45,11 +50,10 @@ int			check_link(char **tab)
 		while (tab[i][++j])
 		{
 			if (tab[i][j] == '#')
-				if (pos_valid(tab, i, j))
-					count++;
+				count += pos_valid(tab, i, j);
 		}
 	}
-	if (count != 4)
+	if (count <= 4)
 		return (0);
 	return (1);
 }

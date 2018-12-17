@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*   ft_show_table.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: trmonich <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/06 15:34:28 by trmonich          #+#    #+#             */
-/*   Updated: 2018/11/06 15:34:30 by trmonich         ###   ########.fr       */
+/*   Created: 2018/12/14 11:59:15 by trmonich          #+#    #+#             */
+/*   Updated: 2018/12/14 12:17:27 by trmonich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_bzero(void *s, size_t len)
+void	ft_show_table(char **tab)
 {
-	size_t		i;
+	int		i;
 
 	i = 0;
-	while (i < len)
+	while (tab[i])
 	{
-		((unsigned char*)s)[i] = 0;
+		ft_putendl(tab[i]);
 		i++;
 	}
-	return (s);
 }

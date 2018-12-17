@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: alesteph <alesteph@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2018/11/29 12:57:53 by alesteph          #+#    #+#              #
-#    Updated: 2018/12/03 14:34:13 by alesteph         ###   ########.fr        #
+#    Created: 2018/12/17 12:30:35 by alesteph          #+#    #+#              #
+#    Updated: 2018/12/17 12:30:40 by alesteph         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,13 @@ FLAGS= -Wall -Werror -Wextra
 
 NAME= fillit
 
-SRCS= $(shell find srcs -maxdepth 1 -type f -name "*.c")
+SRCS= srcs/backtrack.c \
+	  srcs/bitwise.c \
+	  srcs/check_tetri.c \
+	  srcs/display.c \
+	  srcs/pieces.c \
+	  srcs/read.c \
+	  srcs/main.c
 
 INCLUDES= ./includes/
 

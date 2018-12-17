@@ -3,37 +3,41 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alesteph <alesteph@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trmonich <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/08 09:38:12 by alesteph          #+#    #+#             */
-/*   Updated: 2018/11/08 18:41:28 by alesteph         ###   ########.fr       */
+/*   Created: 2018/11/06 16:55:19 by trmonich          #+#    #+#             */
+/*   Updated: 2018/11/08 14:34:17 by trmonich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdlib.h>
 
-void	*ft_memmove(void *dst, const void *src, size_t len)
+void	*ft_memmove(void *dst, const void *src, size_t n)
 {
-	size_t			i;
-	unsigned char	*dst_ptr;
-	unsigned char	*src_ptr;
+	int				i;
+	unsigned char	*pd;
+	unsigned char	*ps;
 
-	dst_ptr = (unsigned char *)dst;
-	src_ptr = (unsigned char *)src;
-	if (src_ptr < dst_ptr && src_ptr + len > dst_ptr)
+	pd = (unsigned char*)dst;
+	ps = (unsigned char*)src;
+	if (ps < pd)
 	{
-		i = len;
-		while (i > 0)
+		i = (int)(n - 1);
+		while (i >= 0)
 		{
-			--i;
-			dst_ptr[i] = src_ptr[i];
+			pd[i] = ps[i];
+			i--;
 		}
 	}
 	else
 	{
-		i = -1;
-		while (++i < len)
-			dst_ptr[i] = src_ptr[i];
+		i = 0;
+		while ((size_t)i < n)
+		{
+			pd[i] = ps[i];
+			i++;
+		}
 	}
 	return (dst);
 }

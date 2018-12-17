@@ -3,48 +3,55 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alesteph <alesteph@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trmonich <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/10 15:02:52 by alesteph          #+#    #+#             */
-/*   Updated: 2018/11/12 10:06:12 by alesteph         ###   ########.fr       */
+/*   Created: 2018/11/09 14:07:30 by trmonich          #+#    #+#             */
+/*   Updated: 2018/11/12 11:55:37 by trmonich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	num_len(unsigned int n)
+static size_t	ft_size_str(unsigned int n)
 {
-	int i;
+	size_t	size;
 
-	i = (n == 0) ? 1 : 0;
-	while (n > 0)
+	size = 1;
+	while (n >= 10)
 	{
-		n = n / 10;
-		i++;
+		n /= 10;
+		size++;
 	}
-	return (i);
+	return (size);
 }
 
-char		*ft_itoa(int n)
+static void		ft_create_str(char *str, size_t size, unsigned int n)
 {
-	int				i;
-	int				sign;
-	unsigned int	nb;
-	char			*str;
+	size_t	i;
 
-	sign = (n < 0) ? 1 : 0;
-	nb = (n < 0) ? n * -1 : n;
-	i = (n < 0) ? num_len(nb) : num_len(nb) - 1;
-	if (!(str = (char *)malloc(sizeof(char) * (num_len(nb) + sign + 1))))
-		return (NULL);
-	if (sign == 1 || n == 0)
-		str[0] = (n == 0) ? '0' : '-';
-	str[i + 1] = '\0';
-	while (nb > 0)
+	i = size - 1;
+	while (i)
 	{
-		str[i] = (nb % 10) + 48;
-		nb = nb / 10;
-		--i;
+		str[i] = n % 10 + 48;
+		n = (n - n % 10) / 10;
+		i--;
 	}
-	return (str);
+	str[0] = n + 48;
+}
+
+char			*ft_itoa(int n)
+{
+	char			*str;
+	size_t			size;
+
+	size = ft_size_str(n < 0 ? -n : n);
+	if (!(str = n < 0 ? ft_strnew(size + 1) : ft_strnew(size)))
+		return (NULL);
+	if (n < 0)
+	{
+		*str = '-';
+		str++;
+	}
+	ft_create_str(str, size, n < 0 ? -n : n);
+	return (n < 0 ? str - 1 : str);
 }

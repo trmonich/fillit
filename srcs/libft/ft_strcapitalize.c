@@ -3,39 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strcapitalize.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alesteph <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: trmonich <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/08/08 15:49:29 by alesteph          #+#    #+#             */
-/*   Updated: 2018/11/14 11:03:13 by alesteph         ###   ########.fr       */
+/*   Created: 2018/08/07 11:43:38 by trmonich          #+#    #+#             */
+/*   Updated: 2018/11/13 21:31:15 by trmonich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strcapitalize(char *str)
+char		*ft_strcapitalize(char *str)
 {
-	int i;
-	int capitalize;
+	char *s;
 
-	i = 0;
-	capitalize = 1;
-	while (str[i])
+	if (!str)
+		return (NULL);
+	s = str;
+	while (*s != '\0')
 	{
-		if (str[i] >= 'A' && str[i] <= 'Z')
-			str[i] += 32;
-		i++;
-	}
-	i = 0;
-	while (str[i])
-	{
-		if ((str[i] < 'a' || str[i] > 'z') && (str[i] < '0' || str[i] > '9'))
-			capitalize = 1;
-		else if (capitalize == 1)
+		while (!ft_isalnum(*s))
 		{
-			str[i] = (str[i] < '0' || str[i] > '9') ? str[i] - 32 : str[i];
-			capitalize = 0;
+			s++;
+			if (*s == '\0')
+				return (str);
 		}
-		i++;
+		if (*s >= 'a' && *s <= 'z')
+			*s = *s - 32;
+		s++;
+		while (ft_isalnum(*s))
+		{
+			if (*s >= 'A' && *s <= 'Z')
+				*s = *s + 32;
+			s++;
+		}
 	}
 	return (str);
 }

@@ -1,19 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd.c                                        :+:      :+:    :+:   */
+/*   bitwise.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: trmonich <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/12 10:43:12 by trmonich          #+#    #+#             */
-/*   Updated: 2018/11/29 11:36:30 by trmonich         ###   ########.fr       */
+/*   Created: 2018/12/10 17:29:56 by trmonich          #+#    #+#             */
+/*   Updated: 2018/12/14 15:00:13 by alesteph         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "fillit.h"
 
-void	ft_lstadd(t_list **alst, t_list *new)
+void	set_bit(unsigned int *tab, int k, int side)
 {
-	new->next = *alst;
-	*alst = new;
+	tab[k / side] |= 1 << (k % side);
+}
+
+void	clear_bit(unsigned int *tab, int k, int side)
+{
+	tab[k / side] &= ~(1 << (k % side));
+}
+
+int		test_bit(unsigned int *tab, int k, int side)
+{
+	return ((tab[k / side] & (1 << (k % side))) != 0);
 }
